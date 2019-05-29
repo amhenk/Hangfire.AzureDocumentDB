@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 
 using Microsoft.Azure.Documents;
+using Newtonsoft.Json.Converters;
 
 // ReSharper disable once CheckNamespace
 namespace Hangfire.Azure.Documents
@@ -16,10 +17,11 @@ namespace Hangfire.Azure.Documents
         public string SelfLink { get; set; }
 
         [JsonProperty("expire_on")]
-        [JsonConverter(typeof(UnixDateTimeConverter))]
+        [JsonConverter(typeof(Microsoft.Azure.Documents.UnixDateTimeConverter))]
         public DateTime? ExpireOn { get; set; }
 
         [JsonProperty("type")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public abstract DocumentTypes DocumentType { get; }
     }
 
